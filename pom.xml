@@ -7,7 +7,13 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>redirect-webapp</name>
   <url>http://github.com/jfuerth/redirect-webapp</url>
-  
+  <licenses>
+    <license>
+      <name>Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.6</maven.compiler.source>
