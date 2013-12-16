@@ -12,7 +12,11 @@
     <init-param>
       <param-name>target-base-url</param-name>
       <param-value>http://erraiframework.org/</param-value>
-    </init-param>    
+    </init-param>
+    <init-param>
+      <param-name>include-subpath</param-name>
+      <param-value>false</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
   	<servlet-name>RedirectServlet</servlet-name>

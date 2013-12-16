@@ -21,7 +21,13 @@ public class RedirectServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	  String relativePath = request.getPathInfo();
 	  URI basePath = URI.create(getInitParameter("target-base-url"));
-	  URI redirectTo = basePath.resolve(relativePath);
+	  URI redirectTo;
+	  if (Boolean.valueOf(getInitParameter("include-subpath"))) {
+	    redirectTo = basePath.resolve(relativePath);
+	  }
+	  else {
+	    redirectTo = basePath;
+	  }
 	  response.setStatus(301);
 	  response.setHeader("location", redirectTo.toString());
 	}
