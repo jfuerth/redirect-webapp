@@ -1,25 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
           http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         version="3.0">
+  version="3.0">
 
+  <description>
+    Redirects requests with HTTP 301 (Moved Permanently) response.
+  </description>
   <display-name>Simple Redirector Web Application</display-name>
-  <servlet>
-  	<servlet-name>RedirectServlet</servlet-name>
-  	<servlet-class>org.jboss.errai.redirect.RedirectServlet</servlet-class>
+  
+  <filter>
+    <filter-name>RedirectServlet</filter-name>
+    <filter-class>org.jboss.errai.redirect.RedirectServlet</filter-class>
     <init-param>
+      <description>
+        The URL to redirect requests to. Should start with 'http://' or 'https://'.
+      </description>
       <param-name>target-base-url</param-name>
       <param-value>http://erraiframework.org/</param-value>
     </init-param>
     <init-param>
+      <description>
+        If true, extra path info after the servlet-mapping or filter-mapping path is appended to target-base-url for the redirect.
+        If false, all requests redirect to target-base-url itself.
+      </description>
       <param-name>include-subpath</param-name>
       <param-value>true</param-value>
     </init-param>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>RedirectServlet</servlet-name>
-  	<url-pattern>/*</url-pattern>
-  </servlet-mapping>
+    <init-param>
+      <description>
+        Comma-separated list of paths to exclude from the redirect. Only works when configured as a filter.
+        Paths are relative to this webapp's context root path, and must not start with a '/'.
+      </description>
+      <param-name>excludes</param-name>
+      <param-value>example-excluded.html</param-value>
+    </init-param>
+  </filter>
+  
+  <filter-mapping>
+    <filter-name>RedirectServlet</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
 </web-app>
